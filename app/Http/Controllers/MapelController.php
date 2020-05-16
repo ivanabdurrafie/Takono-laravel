@@ -3,13 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Kelas;
+use App\Mapel;
 
-class KelasController extends Controller
+class MapelController extends Controller
 {
     public function index()
     {
-        $data = Kelas::all();
+        $data = Mapel::all();
 
         if (count($data) > 0) {
             $res['message'] = 'Success!';
@@ -22,7 +22,7 @@ class KelasController extends Controller
     }
     public function getId($id)
     {
-        $data = Kelas::where('id_kelas', $id)->get();
+        $data = Mapel::where('id_mapel', $id)->get();
         if (count($data) > 0) {
             $res['message'] = 'Success!';
             $res['value'] = $data;
@@ -34,26 +34,26 @@ class KelasController extends Controller
     }
     public function create(Request $request)
     {
-        $kls = new Kelas();
-        $kls->kelas = $request->kelas;
+        $mpl = new Mapel();
+        $mpl->mata_pelajaran = $request->mata_pelajaran;
 
-        if ($kls->save()) {
+        if ($mpl->save()) {
             $res['message'] = 'Data Berhasil Ditambahkan';
-            $res['value'] = $kls;
+            $res['value'] = $mpl;
             return response($res);
         }
     }
-    public function update(Request $request, $id_kelas)
+    public function update(Request $request, $id)
     {
-        $kelas = $request->kelas;
+        $mpel = $request->mata_pelajaran;
 
 
-        $kls = Kelas::find($id_kelas);
-        $kls->kelas = $kelas;
+        $mpl = Mapel::find($id);
+        $mpl->mata_pelajaran = $mpel;
 
-        if ($kls->save()) {
+        if ($mpl->save()) {
             $res['message'] = 'Data Berhasil Diubah';
-            $res['value'] = $kls;
+            $res['value'] = $mpl;
             return response($res);
         } else {
             $res['message'] = 'Gagal!';
@@ -62,9 +62,9 @@ class KelasController extends Controller
     }
     public function delete($id)
     {
-        $kls = Kelas::where('id_kelas', $id);
+        $mpl = Mapel::where('id_mapel', $id);
 
-        if ($kls->delete()) {
+        if ($mpl->delete()) {
             $res['message'] = 'Data Berhasil Dihapus';
             return response($res);
         } else {
