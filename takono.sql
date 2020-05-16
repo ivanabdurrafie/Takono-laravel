@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 14, 2020 at 07:31 PM
+-- Generation Time: May 16, 2020 at 09:33 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -73,11 +73,19 @@ INSERT INTO `kelas` (`id_kelas`, `kelas`) VALUES
 CREATE TABLE `komentar` (
   `id_komentar` int(11) NOT NULL,
   `komentar` text NOT NULL,
+  `tanggal` timestamp NOT NULL DEFAULT current_timestamp(),
   `skor` int(11) NOT NULL,
   `id_pertanyaan` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `balas_komentar` int(11) NOT NULL
+  `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `komentar`
+--
+
+INSERT INTO `komentar` (`id_komentar`, `komentar`, `tanggal`, `skor`, `id_pertanyaan`, `id_user`) VALUES
+(1, 'kayanya si engga', '2020-05-16 07:27:33', 200, 1, 3),
+(2, 'sad', '2020-05-16 07:27:42', 5, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -90,6 +98,13 @@ CREATE TABLE `mapel` (
   `mata_pelajaran` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `mapel`
+--
+
+INSERT INTO `mapel` (`id_mapel`, `mata_pelajaran`) VALUES
+(1, 'Matematika');
+
 -- --------------------------------------------------------
 
 --
@@ -100,9 +115,17 @@ CREATE TABLE `pertanyaan` (
   `id_pertanyaan` int(11) NOT NULL,
   `pertanyaan` text NOT NULL,
   `tanggal` timestamp NOT NULL DEFAULT current_timestamp(),
+  `foto` text DEFAULT NULL,
   `id_mapel` int(11) NOT NULL,
   `id_user` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `pertanyaan`
+--
+
+INSERT INTO `pertanyaan` (`id_pertanyaan`, `pertanyaan`, `tanggal`, `foto`, `id_mapel`, `id_user`) VALUES
+(1, 'apakah doi peka?', '2020-05-16 07:15:51', 'uwu.jpg', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -120,6 +143,14 @@ CREATE TABLE `siswa` (
   `id_kelas` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `siswa`
+--
+
+INSERT INTO `siswa` (`id_siswa`, `nis`, `nama`, `jenkel`, `email`, `foto`, `id_kelas`) VALUES
+(1, 111111, 'Ivan Abdurrafie', 'laki - laki', 'ia@gmail.com', 'yuhu.jpg', 3),
+(2, 222221, 'Oktaviano Andy', 'laki - laki', 'ok@gmail.com', NULL, 3);
+
 -- --------------------------------------------------------
 
 --
@@ -134,6 +165,14 @@ CREATE TABLE `user` (
   `id_siswa` int(11) DEFAULT NULL,
   `id_guru` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`id_user`, `username`, `password`, `level`, `id_siswa`, `id_guru`) VALUES
+(2, 'rafi', '139c4e89cdbedaf144d05ca54a12a57b', 'siswa', 1, NULL),
+(3, 'indra', 'e24f6e3ce19ee0728ff1c443e4ff488d', 'admin', NULL, 1);
 
 --
 -- Indexes for dumped tables
@@ -208,31 +247,31 @@ ALTER TABLE `kelas`
 -- AUTO_INCREMENT for table `komentar`
 --
 ALTER TABLE `komentar`
-  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_komentar` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `mapel`
 --
 ALTER TABLE `mapel`
-  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_mapel` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `pertanyaan`
 --
 ALTER TABLE `pertanyaan`
-  MODIFY `id_pertanyaan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_pertanyaan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `siswa`
 --
 ALTER TABLE `siswa`
-  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_siswa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_user` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- Constraints for dumped tables
