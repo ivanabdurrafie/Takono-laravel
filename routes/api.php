@@ -20,9 +20,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::get('kelas','KelasController@index');
 Route::get('kelas/{id}','KelasController@getId');
-Route::post('kelas','KelasController@create');
+Route::post('kelas/tambah/','KelasController@create');
 Route::put('kelas/update/{id}', 'KelasController@update');
-Route::delete('kelas/{id}', 'KelasController@delete');
+Route::delete('kelas/delete/{id}', 'KelasController@delete');
 
 Route::get('guru','GuruController@index');
 Route::get('guru/{id}','GuruController@getId');
