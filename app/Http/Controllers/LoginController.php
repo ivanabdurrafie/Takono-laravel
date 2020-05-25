@@ -41,7 +41,6 @@ class LoginController extends Controller
     {
         $data = Login::join('guru', 'guru.id_guru', 'user.id_guru')
             ->get();
-
         if (count($data) > 0) {
             $res['message'] = 'Success!';
             $res['value'] = $data;

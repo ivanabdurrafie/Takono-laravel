@@ -62,8 +62,6 @@ class KomentarController extends Controller
     public function update(Request $request, $id)
     {
         // $Guru = $request->Guru;
-
-
         $km = Komentar::find($id);
         $km->komentar = $request->komentar;
         $km->skor = $request->skor;

@@ -11,11 +11,8 @@ class SiswaController extends Controller
     public function index()
     {
         $data = Siswa::join('kelas', 'kelas.id_kelas', 'siswa.id_kelas')
+            ->orderBy('id_siswa')
             ->get();
-        // $data = Siswa::select()->kelasm->get();
-        // $res['message'] = 'Success!';
-        // $res['value'] = $data;
-        // return response($res);
         if (count($data) > 0) {
             $res['message'] = 'Success!';
             $res['value'] = $data;
@@ -27,14 +24,9 @@ class SiswaController extends Controller
     }
     public function getId($id)
     {
-        $data = Siswa::join('kelas', 'kelas.id_kelas','siswa.id_kelas')
-                ->where('id_siswa', $id)
-                ->get();
-        // $data = Siswa::find($id)->kelasm->get();
-        // $res['message'] = 'Success!';
-        // $res['value'] = $data;
-        // return response($res);
-        // $data = Siswa::where('id_siswa', $id)->kelas->get();
+        $data = Siswa::join('kelas', 'kelas.id_kelas', 'siswa.id_kelas')
+            ->where('id_siswa', $id)
+            ->get();
         if (count($data) > 0) {
             $res['message'] = 'Success!';
             $res['value'] = $data;
@@ -63,8 +55,6 @@ class SiswaController extends Controller
     public function update(Request $request, $id)
     {
         // $Guru = $request->Guru;
-
-
         $sw = Siswa::find($id);
         $sw->nama = $request->nama;
         $sw->nis = $request->nis;

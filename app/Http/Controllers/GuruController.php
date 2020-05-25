@@ -9,7 +9,8 @@ class GuruController extends Controller
 {
     public function index()
     {
-        $data = Guru::all();
+        $data = Guru::orderBy('id_guru')
+            ->get();
 
         if (count($data) > 0) {
             $res['message'] = 'Success!';
