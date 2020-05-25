@@ -51,8 +51,6 @@ class GuruController extends Controller
     public function update(Request $request, $id)
     {
         $Guru = $request->Guru;
-
-
         $gr = Guru::find($id);
         $gr->nama = $request->nama;
         $gr->nip = $request->nip;
@@ -71,7 +69,7 @@ class GuruController extends Controller
     }
     public function delete($id)
     {
-        $gr = Guru::where('id_guru', $id);
+        $gr = Guru::where('nip', $id);
 
         if ($gr->delete()) {
             $res['message'] = 'Data Berhasil Dihapus';

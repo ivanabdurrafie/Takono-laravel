@@ -74,7 +74,7 @@ class SiswaController extends Controller
     }
     public function delete($id)
     {
-        $sw = Siswa::where('id_siswa', $id);
+        $sw = Siswa::where('nis', $id);
 
         if ($sw->delete()) {
             $res['message'] = 'Data Berhasil Dihapus';
