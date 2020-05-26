@@ -22,9 +22,11 @@ class KomentarController extends Controller
             return response($res);
         } else {
             $res['message'] = 'Kosong!';
+            $res['value'] = $data;
             return response($res);
         }
     }
+
     public function getId($id)
     {
         $data = Komentar::join('user', 'user.id_user', 'Komentar.id_user')
@@ -45,12 +47,34 @@ class KomentarController extends Controller
             return response($res);
         }
     }
+
+    public function getIdPertanyaan($id)
+    {
+        $data = Komentar::where('id_pertanyaan', $id)
+            ->get();
+        // $data = Komentar::find($id)->kelasm->get();
+        // $res['message'] = 'Success!';
+        // $res['value'] = $data;
+        // return response($res);
+        // $data = Komentar::where('id_siswa', $id)->kelas->get();
+        if (count($data) > 0) {
+            $res['message'] = 'Success!';
+            $res['value'] = $data;
+            return response($res);
+        } else {
+            $res['message'] = 'Gagal!';
+            $res['value'] = $data;
+            return response($res);
+        }
+    }
+
     public function create(Request $request)
     {
         $km = new Komentar();
         $km->komentar = $request->komentar;
         $km->skor = $request->skor;
         $km->id_pertanyaan = $request->id_pertanyaan;
+        $km->oleh = $request->oleh;
         $km->id_user = $request->id_user;
 
         if ($km->save()) {
@@ -59,6 +83,7 @@ class KomentarController extends Controller
             return response($res);
         }
     }
+
     public function update(Request $request, $id)
     {
         // $Guru = $request->Guru;
@@ -66,6 +91,7 @@ class KomentarController extends Controller
         $km->komentar = $request->komentar;
         $km->skor = $request->skor;
         $km->id_pertanyaan = $request->id_pertanyaan;
+        $km->oleh = $request->oleh;
         $km->id_user = $request->id_user;
 
         if ($km->save()) {
@@ -77,12 +103,29 @@ class KomentarController extends Controller
             return response($res);
         }
     }
+
     public function delete($id)
     {
         $km = Komentar::where('id_komentar', $id);
 
         if ($km->delete()) {
             $res['message'] = 'Data Berhasil Dihapus';
+            return response($res);
+        } else {
+            $res['message'] = 'Gagal!';
+            return response($res);
+        }
+    }
+
+    public function like(Request $request, $id)
+    {
+        // $Guru = $request->Guru;
+        $km = Komentar::find($id);
+        $km->skor = Komentar::raw('skor + 1');
+
+        if ($km->save()) {
+            $res['message'] = 'Data Berhasil Diubah';
+            $res['value'] = $km;
             return response($res);
         } else {
             $res['message'] = 'Gagal!';

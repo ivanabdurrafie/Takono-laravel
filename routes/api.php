@@ -54,14 +54,15 @@ Route::delete('siswa/delete/{id}', 'SiswaController@delete');
 // Route::put('login/update/{id}', 'LoginController@update');
 // Route::delete('login/{id}', 'LoginController@delete');
 
-Route::get('pertanyaan','PertanyaanController@index');
+Route::get('pertanyaan/','PertanyaanController@index');
 Route::get('pertanyaan/{id}','PertanyaanController@getId');
 Route::post('pertanyaan/tambah','PertanyaanController@create');
 Route::put('pertanyaan/update/{id}', 'PertanyaanController@update');
 Route::delete('pertanyaan/delete/{id}', 'PertanyaanController@delete');
 
 Route::get('komentar','KomentarController@index');
-Route::get('komentar/{id}','KomentarController@getId');
+Route::get('komentar/{id}','KomentarController@getIdPertanyaan');
 Route::post('komentar/tambah','KomentarController@create');
 Route::put('komentar/update/{id}', 'KomentarController@update');
+Route::put('komentar/like/{id}', 'KomentarController@like');
 Route::delete('komentar/delete/{id}', 'KomentarController@delete');

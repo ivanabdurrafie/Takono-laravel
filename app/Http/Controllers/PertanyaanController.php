@@ -9,8 +9,7 @@ class PertanyaanController extends Controller
 {
     public function index()
     {
-        $data = Pertanyaan::join('user', 'user.id_user', 'pertanyaan.id_user')
-            ->join('mapel', 'mapel.id_mapel', 'pertanyaan.id_mapel')
+        $data = Pertanyaan::join('mapel', 'mapel.id_mapel', 'pertanyaan.id_mapel')
             ->get();
         // $data = Pertanyaan::select()->kelasm->get();
         // $res['message'] = 'Success!';
@@ -27,8 +26,7 @@ class PertanyaanController extends Controller
     }
     public function getId($id)
     {
-        $data = Pertanyaan::join('user', 'user.id_user', 'pertanyaan.id_user')
-        ->join('mapel', 'mapel.id_mapel', 'pertanyaan.id_mapel')
+        $data = Pertanyaan::join('mapel', 'mapel.id_mapel', 'pertanyaan.id_mapel')
             ->where('id_pertanyaan', $id)
             ->get();
         // $data = Pertanyaan::find($id)->kelasm->get();
@@ -51,6 +49,7 @@ class PertanyaanController extends Controller
         $pt->pertanyaan = $request->pertanyaan;
         $pt->id_mapel = $request->id_mapel;
         $pt->foto = $request->foto;
+        $pt->oleh = $request->oleh;
         $pt->id_user = $request->id_user;
 
         if ($pt->save()) {
@@ -68,6 +67,7 @@ class PertanyaanController extends Controller
         $pt->pertanyaan = $request->pertanyaan;
         $pt->id_mapel = $request->id_mapel;
         $pt->foto = $request->foto;
+        $pt->oleh = $request->oleh;
         $pt->id_user = $request->id_user;
 
         if ($pt->save()) {
