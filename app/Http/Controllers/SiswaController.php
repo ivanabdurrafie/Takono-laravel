@@ -22,6 +22,7 @@ class SiswaController extends Controller
             return response($res);
         }
     }
+
     public function getId($id)
     {
         $data = Siswa::join('kelas', 'kelas.id_kelas', 'siswa.id_kelas')
@@ -36,6 +37,22 @@ class SiswaController extends Controller
             return response($res);
         }
     }
+
+    public function getNis($id)
+    {
+        $data = Siswa::join('kelas', 'kelas.id_kelas', 'siswa.id_kelas')
+            ->where('nis', $id)
+            ->get();
+        if (count($data) > 0) {
+            $res['message'] = 'Success!';
+            $res['value'] = $data;
+            return response($res);
+        } else {
+            $res['message'] = 'Gagal!';
+            return response($res);
+        }
+    }
+
     public function create(Request $request)
     {
         $sw = new Siswa();
@@ -46,10 +63,14 @@ class SiswaController extends Controller
         $sw->foto = $request->foto;
         $sw->id_kelas = $request->id_kelas;
 
-        if ($sw->save()) {
-            $res['message'] = 'Data Berhasil Ditambahkan';
-            $res['value'] = $sw;
-            return response($res);
+        if (Siswa::where('nis', $request->nis)->first()) {
+            $res['message'] = 'Data Gagal ditambahkan';
+        } else {
+            if ($sw->save()) {
+                $res['message'] = 'Data Berhasil Ditambahkan';
+                $res['value'] = $sw;
+                return response($res);
+            }
         }
     }
     public function update(Request $request, $id)

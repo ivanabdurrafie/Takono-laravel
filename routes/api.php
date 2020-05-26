@@ -26,6 +26,7 @@ Route::delete('kelas/delete/{id}', 'KelasController@delete');
 
 Route::get('guru','GuruController@index');
 Route::get('guru/{id}','GuruController@getId');
+Route::get('guru/nip/{id}','GuruController@getNip');
 Route::post('guru/tambah','GuruController@create');
 Route::put('guru/update/{id}', 'GuruController@update');
 Route::delete('guru/delete/{id}', 'GuruController@delete');
@@ -38,6 +39,7 @@ Route::delete('mapel/delete/{id}', 'MapelController@delete');
 
 Route::get('siswa','SiswaController@index');
 Route::get('siswa/{id}','SiswaController@getId');
+Route::get('siswa/nis/{id}','SiswaController@getNis');
 Route::post('siswa/tambah','SiswaController@create');
 Route::put('siswa/update/{id}', 'SiswaController@update');
 Route::delete('siswa/delete/{id}', 'SiswaController@delete');

@@ -21,6 +21,7 @@ class GuruController extends Controller
             return response($res);
         }
     }
+
     public function getId($id)
     {
         $data = Guru::where('id_guru', $id)->get();
@@ -33,6 +34,20 @@ class GuruController extends Controller
             return response($res);
         }
     }
+
+    public function getNip($id)
+    {
+        $data = Guru::where('nip', $id)->get();
+        if (count($data) > 0) {
+            $res['message'] = 'Success!';
+            $res['value'] = $data;
+            return response($res);
+        } else {
+            $res['message'] = 'Gagal!';
+            return response($res);
+        }
+    }
+
     public function create(Request $request)
     {
         $gr = new Guru();
@@ -42,10 +57,14 @@ class GuruController extends Controller
         $gr->jenkel = $request->jenkel;
         $gr->foto = $request->foto;
 
-        if ($gr->save()) {
-            $res['message'] = 'Data Berhasil Ditambahkan';
-            $res['value'] = $gr;
-            return response($res);
+        if (Guru::where('nip', $request->nip)->first()) {
+            $res['message'] = 'Data Gagal ditambahkan';
+        } else {
+            if ($gr->save()) {
+                $res['message'] = 'Data Berhasil Ditambahkan';
+                $res['value'] = $gr;
+                return response($res);
+            }
         }
     }
     public function update(Request $request, $id)
