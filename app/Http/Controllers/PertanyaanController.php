@@ -10,6 +10,7 @@ class PertanyaanController extends Controller
     public function index()
     {
         $data = Pertanyaan::join('mapel', 'mapel.id_mapel', 'pertanyaan.id_mapel')
+            ->orderby('id_pertanyaan', 'desc')
             ->get();
         // $data = Pertanyaan::select()->kelasm->get();
         // $res['message'] = 'Success!';
@@ -63,8 +64,6 @@ class PertanyaanController extends Controller
     public function update(Request $request, $id)
     {
         // $Guru = $request->Guru;
-
-
         $pt = Pertanyaan::find($id);
         $pt->pertanyaan = $request->pertanyaan;
         $pt->id_mapel = $request->id_mapel;
