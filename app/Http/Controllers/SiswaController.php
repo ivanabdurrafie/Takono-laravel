@@ -19,6 +19,7 @@ class SiswaController extends Controller
             return response($res);
         } else {
             $res['message'] = 'Kosong!';
+            $res['value'] = $data;
             return response($res);
         }
     }
@@ -34,6 +35,7 @@ class SiswaController extends Controller
             return response($res);
         } else {
             $res['message'] = 'Gagal!';
+            $res['value'] = $data;
             return response($res);
         }
     }
@@ -49,6 +51,7 @@ class SiswaController extends Controller
             return response($res);
         } else {
             $res['message'] = 'Gagal!';
+            $res['value'] = $data;
             return response($res);
         }
     }

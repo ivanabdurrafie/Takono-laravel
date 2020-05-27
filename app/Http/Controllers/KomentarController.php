@@ -11,6 +11,7 @@ class KomentarController extends Controller
     {
         $data = Komentar::join('user', 'user.id_user', 'komentar.id_user')
             ->join('pertanyaan', 'pertanyaan.id_pertanyaan', 'komentar.id_pertanyaan')
+            ->orderby('tanggal', 'desc')
             ->get();
         // $data = Komentar::select()->kelasm->get();
         // $res['message'] = 'Success!';
@@ -44,6 +45,7 @@ class KomentarController extends Controller
             return response($res);
         } else {
             $res['message'] = 'Gagal!';
+            $res['value'] = $data;
             return response($res);
         }
     }
@@ -51,6 +53,7 @@ class KomentarController extends Controller
     public function getIdPertanyaan($id)
     {
         $data = Komentar::where('id_pertanyaan', $id)
+            ->orderby('tanggal', 'desc')
             ->get();
         // $data = Komentar::find($id)->kelasm->get();
         // $res['message'] = 'Success!';
@@ -73,6 +76,7 @@ class KomentarController extends Controller
         $km = new Komentar();
         $km->komentar = $request->komentar;
         $km->skor = $request->skor;
+        $km->foto = $request->foto;
         $km->id_pertanyaan = $request->id_pertanyaan;
         $km->oleh = $request->oleh;
         $km->id_user = $request->id_user;
@@ -90,6 +94,7 @@ class KomentarController extends Controller
         $km = Komentar::find($id);
         $km->komentar = $request->komentar;
         $km->skor = $request->skor;
+        $km->foto = $request->foto;
         $km->id_pertanyaan = $request->id_pertanyaan;
         $km->oleh = $request->oleh;
         $km->id_user = $request->id_user;
