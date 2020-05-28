@@ -9,9 +9,9 @@ class KomentarController extends Controller
 {
     public function index()
     {
-        $data = Komentar::join('user', 'user.id_user', 'komentar.id_user')
+        $data = Komentar::select('komentar.id_komentar', 'komentar.tanggal', 'komentar.oleh', 'komentar.komentar','pertanyaan.id_pertanyaan')
             ->join('pertanyaan', 'pertanyaan.id_pertanyaan', 'komentar.id_pertanyaan')
-            ->orderby('tanggal', 'desc')
+            ->orderby('komentar.tanggal', 'desc')
             ->get();
         // $data = Komentar::select()->kelasm->get();
         // $res['message'] = 'Success!';

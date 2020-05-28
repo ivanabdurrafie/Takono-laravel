@@ -26,6 +26,7 @@ class PertanyaanController extends Controller
             return response($res);
         }
     }
+    
     public function getId($id)
     {
         $data = Pertanyaan::join('mapel', 'mapel.id_mapel', 'pertanyaan.id_mapel')
@@ -46,6 +47,7 @@ class PertanyaanController extends Controller
             return response($res);
         }
     }
+    
     public function create(Request $request)
     {
         $pt = new Pertanyaan();
