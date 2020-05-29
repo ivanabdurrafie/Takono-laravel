@@ -71,6 +71,8 @@ class PertanyaanController extends Controller
         $pt->id_mapel = $request->id_mapel;
         $pt->foto = $request->foto;
         $pt->oleh = $request->oleh;
+        $pt->tanggal_edit = $request->tanggal_edit;
+        $pt->status = $request->status;
         $pt->id_user = $request->id_user;
 
         if ($pt->save()) {

@@ -62,6 +62,7 @@ Route::delete('pertanyaan/delete/{id}', 'PertanyaanController@delete');
 
 Route::get('komentar','KomentarController@index');
 Route::get('komentar/{id}','KomentarController@getIdPertanyaan');
+Route::get('komentar/detail/{id}','KomentarController@getId');
 Route::post('komentar/tambah','KomentarController@create');
 Route::put('komentar/update/{id}', 'KomentarController@update');
 Route::put('komentar/like/{id}', 'KomentarController@like');

@@ -9,7 +9,7 @@ class KomentarController extends Controller
 {
     public function index()
     {
-        $data = Komentar::select('komentar.id_komentar', 'komentar.tanggal', 'komentar.oleh', 'komentar.komentar','pertanyaan.id_pertanyaan')
+        $data = Komentar::select('komentar.id_komentar', 'komentar.tanggal', 'komentar.oleh', 'komentar.komentar', 'pertanyaan.id_pertanyaan', 'komentar.id_user')
             ->join('pertanyaan', 'pertanyaan.id_pertanyaan', 'komentar.id_pertanyaan')
             ->orderby('komentar.tanggal', 'desc')
             ->get();
@@ -30,9 +30,7 @@ class KomentarController extends Controller
 
     public function getId($id)
     {
-        $data = Komentar::join('user', 'user.id_user', 'Komentar.id_user')
-            ->join('pertanyaan', 'pertanyaan.id_pertanyaan', 'Komentar.id_pertanyaan')
-            ->where('id_komentar', $id)
+        $data = Komentar::where('id_komentar', $id)
             ->get();
         // $data = Komentar::find($id)->kelasm->get();
         // $res['message'] = 'Success!';
@@ -95,9 +93,12 @@ class KomentarController extends Controller
         $km->komentar = $request->komentar;
         $km->skor = $request->skor;
         $km->foto = $request->foto;
+        $km->tanggal = $request->tanggal;
         $km->id_pertanyaan = $request->id_pertanyaan;
         $km->oleh = $request->oleh;
         $km->id_user = $request->id_user;
+        $km->tanggal_edit = $request->tanggal_edit;
+        $km->status = $request->status;
 
         if ($km->save()) {
             $res['message'] = 'Data Berhasil Diubah';
